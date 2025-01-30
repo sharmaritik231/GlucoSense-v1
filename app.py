@@ -106,8 +106,8 @@ def show_report():
             """, unsafe_allow_html=True)
 
         st.dataframe(df.style.set_table_styles([
-            {'selector': 'th', 'props': [('padding', '12px 10px'), ('font-size', '14px')]},
-            {'selector': 'td', 'props': [('padding', '12px 10px'), ('font-size', '14px')]}
+            {'selector': 'th', 'props': [('padding', '15px 10px'), ('font-size', '14px')]},
+            {'selector': 'td', 'props': [('padding', '15px 10px'), ('font-size', '14px')]}
         ]).hide(axis='index'), height=350)
 
     else:
