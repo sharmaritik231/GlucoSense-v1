@@ -84,11 +84,11 @@ def show_report():
         st.write(f"**Min BP:** {st.session_state['min_bp']}")
         st.write(f"**SPO2:** {st.session_state['spo2']}")
 
-        st.markdown("### BGL Severity")
+        st.markdown("#### BGL Severity")
         st.write(f"{st.session_state['name']}, your blood sugar is: **{st.session_state['diabetes_result']}**")
 
-        st.markdown("### Blood Glucose Level (mg/dL)")
-        st.write(f"{st.session_state['name']}, your BGL is: **{st.session_state['bgl_result']}**")
+        st.markdown("#### Blood Glucose Level (mg/dL)")
+        st.write(f"{st.session_state['name']}, Your BGL is: **{st.session_state['bgl_result']}**")
 
     else:
         st.warning("Please complete the test on the 'Breath Dataset' page first.")
