@@ -23,7 +23,13 @@ def main():
             data = pd.read_csv(uploaded_file, skiprows=3)
 
             # Generate data for the test
-            test_data, body_vitals = commons.generate_data(uploaded_file, age, gender, heart_rate, max_bp, min_bp, spo2)
+            data['Age'] = age
+            data['Gender'] = gender
+            data['Heart_Beat'] = heart_rate
+            data['SPO2'] = spo2
+            data['max_BP'] = max_bp
+            data['min_BP'] = min_bp
+            test_data = commons.generate_data(data)
 
             # Perform tests
             diabetes_result = commons.perform_diabetes_test(test_data)
