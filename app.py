@@ -92,7 +92,36 @@ def show_report():
         st.markdown("### Blood Glucose Level (mg/dL)")
         st.write(f"{st.session_state['name']}, your BGL is: **{st.session_state['bgl_result']} mg/dL**")
 
-        # Additional visualizations or formatting can be added here
+        # Visualize body vitals
+        st.markdown("### Body Vitals Visualization")
+        body_vitals = st.session_state["body_vitals"].copy()
+        body_vitals_melted = body_vitals.melt(var_name="Vital", value_name="Value")
+        
+        fig, ax = plt.subplots()
+        sns.barplot(data=body_vitals_melted, x="Vital", y="Value", ax=ax)
+        ax.set_title("Body Vitals")
+        st.pyplot(fig)
+
+        # Visualize BGL with thresholds
+        st.markdown("### Blood Glucose Level (BGL) Visualization")
+        fig, ax = plt.subplots()
+        bgl_value = st.session_state["bgl_result"]
+        ax.bar(["BGL"], [bgl_value], color="blue")
+        
+        # Mark thresholds
+        normal_range = (70, 140)
+        prediabetes_range = (140, 199)
+        diabetes_range = (200, 500)
+
+        ax.axhline(y=normal_range[1], color='green', linestyle='--', label='Normal Upper Limit')
+        ax.axhline(y=prediabetes_range[1], color='orange', linestyle='--', label='Prediabetes Upper Limit')
+        ax.axhline(y=diabetes_range[1], color='red', linestyle='--', label='Diabetes Upper Limit')
+
+        ax.legend()
+        ax.set_title("Blood Glucose Level (BGL)")
+        ax.set_ylabel("BGL (mg/dL)")
+        st.pyplot(fig)
+
     else:
         st.warning("Please complete the test on the 'Breath Dataset' page first.")
 
