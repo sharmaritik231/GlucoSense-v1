@@ -4,7 +4,7 @@ import commons  # Make sure to import your module that contains generate_data, p
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-# Increase the width of the content
+# Increase the width of the content for all pages
 st.set_page_config(layout="wide")
 
 def main():
@@ -91,7 +91,24 @@ def show_report():
             ]
         }
         df = pd.DataFrame(data)
-        st.table(df)
+
+        # Apply CSS styling to remove index and adjust width
+        st.markdown("""
+            <style>
+            .report-table th, .report-table td {
+                padding: 4px 8px;
+                font-size: 14px;
+            }
+            .report-table {
+                width: 50%;
+            }
+            </style>
+            """, unsafe_allow_html=True)
+
+        st.dataframe(df.style.set_table_styles([
+            {'selector': 'th', 'props': [('padding', '4px 8px'), ('font-size', '14px')]},
+            {'selector': 'td', 'props': [('padding', '4px 8px'), ('font-size', '14px')]}
+        ]).hide(axis='index'), height=300)
 
     else:
         st.warning("Please complete the test on the 'Breath Dataset' page first.")
