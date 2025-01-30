@@ -5,7 +5,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Increase the width of the content for all pages
-st.set_page_config(layout="wide")
+st.set_page_config(layout="centred")
 
 def main():
     st.sidebar.title("Navigation")
