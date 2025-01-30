@@ -76,19 +76,22 @@ def show_report():
     st.write("Here is your detailed diabetes and BGL report.")
 
     if "diabetes_result" in st.session_state and "bgl_result" in st.session_state:
-        st.write(f"**Name:** {st.session_state['name']}")
-        st.write(f"**Age:** {st.session_state['age']}")
-        st.write(f"**Gender:** {'Male' if st.session_state['gender'] == 0 else 'Female'}")
-        st.write(f"**Heart Rate:** {st.session_state['heart_rate']}")
-        st.write(f"**Max BP:** {st.session_state['max_bp']}")
-        st.write(f"**Min BP:** {st.session_state['min_bp']}")
-        st.write(f"**SPO2:** {st.session_state['spo2']}")
-
-        st.markdown("#### BGL Severity")
-        st.write(f"{st.session_state['name']}, your blood sugar is: **{st.session_state['diabetes_result']}**")
-
-        st.markdown("#### Blood Glucose Level (mg/dL)")
-        st.write(f"{st.session_state['name']}, Your BGL is: **{st.session_state['bgl_result']}**")
+        data = {
+            "Parameter": ["Name", "Age", "Gender", "Heart Rate", "Max BP", "Min BP", "SPO2", "BGL Severity", "Blood Glucose Level (mg/dL)"],
+            "Value": [
+                st.session_state['name'],
+                st.session_state['age'],
+                'Male' if st.session_state['gender'] == 0 else 'Female',
+                st.session_state['heart_rate'],
+                st.session_state['max_bp'],
+                st.session_state['min_bp'],
+                st.session_state['spo2'],
+                st.session_state['diabetes_result'],
+                st.session_state['bgl_result']
+            ]
+        }
+        df = pd.DataFrame(data)
+        st.table(df)
 
     else:
         st.warning("Please complete the test on the 'Breath Dataset' page first.")
