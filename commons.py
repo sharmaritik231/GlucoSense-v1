@@ -13,11 +13,11 @@ def perform_diabetes_test(test_data):
     model = load_model('models/RF.pkl')
     test_label = model.predict(test_data)
     if test_label == 0:
-        return "Your Blood Sugar is Low"
+        return "Low"
     elif test_label == 1:
-        return "Your Blood Sugar is Medium"
+        return "Medium"
     else:
-        return "Your Blood sugar is High"
+        return "High"
 
 def perform_feature_selection(test_data):
     selector = load_model("models/selector.pkl")
