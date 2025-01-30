@@ -15,10 +15,10 @@ def main():
 
 def show_home():
     st.title("GlucoSense: A non-invasive diabetes monitor")
-    st.write("Enter your personal information below.")
+    st.write("Enter your personal information below. Also, enter the heart rate, SPO2, and blood pressure after measurement using standard devices.")
     
     # Input fields with default values
-    name = st.text_input("Name", value="John Doe")
+    name = st.text_input("Name", value="Ritik Sharma")
     age = st.number_input("Age", min_value=0, value=30)
     gender = st.selectbox("Gender", options=["Male", "Female", "Other"], index=0)
     gender = 0 if gender == "Male" else 1
