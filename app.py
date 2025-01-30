@@ -20,7 +20,7 @@ def main():
     if st.button("Submit"):
         if uploaded_file is not None:
             # Read the CSV file
-            data = pd.read_csv(uploaded_file)
+            data = pd.read_csv(uploaded_file, skiprows=3)
 
             # Generate data for the test
             test_data = commons.generate_data(data)
