@@ -76,16 +76,19 @@ def show_report():
     st.write("Here is your detailed diabetes and BGL report.")
 
     if "diabetes_result" in st.session_state and "bgl_result" in st.session_state:
-        st.info(f"**Name:** {st.session_state['name']}")
-        st.info(f"**Age:** {st.session_state['age']}")
-        st.info(f"**Gender:** {'Male' if st.session_state['gender'] == 0 else 'Female'}")
-        
-        st.metric(label="Heart Rate", value=f"{st.session_state['heart_rate']} bpm")
-        st.metric(label="Max BP", value=f"{st.session_state['max_bp']} mmHg")
-        st.metric(label="Min BP", value=f"{st.session_state['min_bp']} mmHg")
-        st.metric(label="SPO2", value=f"{st.session_state['spo2']} %")
-        st.metric(label="BGL Severity", value=st.session_state['diabetes_result'])
-        st.metric(label="Blood Glucose Level (mg/dL)", value=f"{st.session_state['bgl_result']} mg/dL")
+        col1, col2 = st.columns(2)
+        with col1:
+            st.write(f"**Name:** {st.session_state['name']}")
+            st.write(f"**Age:** {st.session_state['age']}")
+            st.write(f"**Gender:** {'Male' if st.session_state['gender'] == 0 else 'Female'}")
+            st.metric(label="Max BP", value=f"{st.session_state['max_bp']} mmHg")
+            st.metric(label="Min BP", value=f"{st.session_state['min_bp']} mmHg")
+
+        with col2:
+            st.metric(label="Heart Rate", value=f"{st.session_state['heart_rate']} bpm")
+            st.metric(label="SPO2", value=f"{st.session_state['spo2']} %")
+            st.metric(label="BGL Severity", value=st.session_state['diabetes_result'])
+            st.metric(label="Blood Glucose Level (mg/dL)", value=f"{st.session_state['bgl_result']} mg/dL")
 
     else:
         st.warning("Please complete the test on the 'Breath Dataset' page first.")
