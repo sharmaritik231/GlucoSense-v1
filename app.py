@@ -21,19 +21,19 @@ def show_home():
     st.write("Enter your personal information below.")
     
     # Creating columns
-    col1, col2, col3 = st.columns(3)
+    col1, col2 = st.columns(2)
 
     # Input fields with default values in columns
     with col1:
         name = st.text_input("Name", value="Ritik Sharma")
         age = st.number_input("Age", min_value=0, value=30)
-        gender = st.selectbox("Gender", options=["Male", "Female", "Other"], index=0)
-        
-    with col2:
         heart_rate = st.number_input("Heart Rate", min_value=0, value=70)
         spo2 = st.number_input("SPO2", min_value=0, max_value=100, value=95)
+    with col2:
+        min_bp = st.number_input("Min BP", min_value=0, value=80)
+        max_bp = st.number_input("Max BP", min_value=0, value=120)
         
-         # File upload
+        # File upload
         uploaded_file = st.file_uploader("Breath data from GlucoSense", type=["csv"])
     
         if uploaded_file is not None:
@@ -56,10 +56,6 @@ def show_home():
         else:
             st.warning("Please upload a CSV file.")
         
-    with col3:
-        min_bp = st.number_input("Min BP", min_value=0, value=80)
-        max_bp = st.number_input("Max BP", min_value=0, value=120)
-
     gender = 0 if gender == "Male" else 1
     body_vitals = {'Age': [age], 'Gender': [gender], 'Heart_Beat': [heart_rate], 'SPO2': [spo2], 'max_BP': [max_bp], 'min_BP': [min_bp]}
     body_vitals = pd.DataFrame(body_vitals)
