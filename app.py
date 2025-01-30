@@ -3,22 +3,22 @@ import pandas as pd
 import commons  # Make sure to import your module that contains generate_data, perform_feature_selection, perform_diabetes_test, and perform_bgl_test
 
 def main():
-    st.sidebar.title("Navigation")
-    selection = st.sidebar.selectbox("Go to", ["Personal Information", "Breath Dataset", "Diabetic Report"])
-
-    if selection == "Personal Information":
+    if "page" not in st.session_state:
+        st.session_state.page = "Personal Information"
+    
+    if st.session_state.page == "Personal Information":
         show_home()
-    elif selection == "Breath Dataset":
+    elif st.session_state.page == "Breath Dataset":
         show_upload()
-    elif selection == "Diabetic Report":
+    elif st.session_state.page == "Diabetic Report":
         show_report()
 
 def show_home():
     st.title("GlucoSense: A non-invasive diabetes monitor")
-    st.write("Enter your personal information below. Also, enter the heart rate, SPO2, and blood pressure after measurement using standard devices.")
+    st.write("Enter your personal information below.")
     
     # Input fields with default values
-    name = st.text_input("Name", value="Ritik Sharma")
+    name = st.text_input("Name", value="John Doe")
     age = st.number_input("Age", min_value=0, value=30)
     gender = st.selectbox("Gender", options=["Male", "Female", "Other"], index=0)
     gender = 0 if gender == "Male" else 1
@@ -38,6 +38,10 @@ def show_home():
     st.session_state["min_bp"] = min_bp
     st.session_state["spo2"] = spo2
     st.session_state["body_vitals"] = body_vitals
+
+    if st.button("Next"):
+        st.session_state.page = "Breath Dataset"
+        st.experimental_rerun()
 
 def show_upload():
     st.title("GlucoSense: A non-invasive diabetes monitor")
@@ -63,8 +67,16 @@ def show_upload():
         st.session_state["bgl_result"] = bgl_result
 
         st.success("Test Completed! Go to the 'Diabetic Report' page to see the results.")
-    else:
-        st.warning("Please upload a CSV file.")
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        if st.button("Previous"):
+            st.session_state.page = "Personal Information"
+            st.experimental_rerun()
+    with col2:
+        if st.button("Next"):
+            st.session_state.page = "Diabetic Report"
+            st.experimental_rerun()
 
 def show_report():
     st.title("GlucoSense: A non-invasive diabetes monitor")
@@ -90,6 +102,10 @@ def show_report():
         # Additional visualizations or formatting can be added here
     else:
         st.warning("Please complete the test on the 'Breath Dataset' page first.")
+
+    if st.button("Previous"):
+        st.session_state.page = "Breath Dataset"
+        st.experimental_rerun()
 
 if __name__ == "__main__":
     main()
