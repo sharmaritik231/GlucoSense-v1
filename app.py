@@ -91,24 +91,7 @@ def show_report():
             ]
         }
         df = pd.DataFrame(data)
-
-        # Apply CSS styling to remove index and adjust width
-        st.markdown("""
-            <style>
-            .report-table th, .report-table td {
-                padding: 4px 8px;
-                font-size: 14px;
-            }
-            .report-table {
-                width: 50%;
-            }
-            </style>
-            """, unsafe_allow_html=True)
-
-        st.dataframe(df.style.set_table_styles([
-            {'selector': 'th', 'props': [('padding', '15px 10px'), ('font-size', '14px')]},
-            {'selector': 'td', 'props': [('padding', '15px 10px'), ('font-size', '14px')]}
-        ]).hide(axis='index'), height=350)
+        st.write(df)
 
     else:
         st.warning("Please complete the test on the 'Breath Dataset' page first.")
