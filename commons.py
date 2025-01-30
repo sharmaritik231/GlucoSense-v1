@@ -31,7 +31,7 @@ def remove_irrelevant_data(df):
     df = df.drop(['SSID', 'Device', 'H', 'T', 'Time'], axis=1)
     return df.reset_index(drop=True)
 
-def generate_data(sensor_data, body_vitals):
+def generate_data(sensors_data, body_vitals):
     cleaned_df = remove_irrelevant_data(sensors_data)
     features_df = feature_eng.generate_features(df=cleaned_df)
     final_df = pd.concat([body_vitals, features_df], axis=1)
