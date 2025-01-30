@@ -27,9 +27,10 @@ def show_home():
     with col1:
         name = st.text_input("Name", value="Ritik Sharma")
         age = st.number_input("Age", min_value=0, value=30)
+        gender = st.selectbox("Gender", options=["Male", "Female", "Other"], index=0)
         heart_rate = st.number_input("Heart Rate", min_value=0, value=70)
-        spo2 = st.number_input("SPO2", min_value=0, max_value=100, value=95)
     with col2:
+        spo2 = st.number_input("SPO2", min_value=0, max_value=100, value=95)
         min_bp = st.number_input("Min BP", min_value=0, value=80)
         max_bp = st.number_input("Max BP", min_value=0, value=120)
         
