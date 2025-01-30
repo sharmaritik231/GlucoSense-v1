@@ -94,7 +94,7 @@ def show_report():
 
         # Visualize BGL with thresholds
         st.markdown("### Blood Glucose Level (BGL) Visualization")
-        fig, ax = plt.subplots()
+        fig, ax = plt.subplots(figsize=(10, 5)
         bgl_value = st.session_state["bgl_result"]
         ax.bar(["BGL"], [bgl_value], color="blue")
         
