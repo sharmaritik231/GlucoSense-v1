@@ -15,6 +15,7 @@ def main():
     min_bp = st.number_input("Min BP", min_value=0)
     spo2 = st.number_input("SPO2", min_value=0, max_value=100)
     body_vitals = {'Age': [age], 'Gender': [gender], 'Heart_Beat': [heart_rate], 'SPO2': [spo2], 'max_BP': [max_bp], 'min_BP': [min_bp]}
+    body_vitals = pd.DataFrame(body_vitals)
 
     # File upload
     uploaded_file = st.file_uploader("Upload CSV file", type=["csv"])
