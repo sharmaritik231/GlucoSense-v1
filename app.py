@@ -83,8 +83,6 @@ def show_report():
         st.write(f"**Max BP:** {st.session_state['max_bp']}")
         st.write(f"**Min BP:** {st.session_state['min_bp']}")
         st.write(f"**SPO2:** {st.session_state['spo2']}")
-        st.write(f"**Diabetes Test Result:** {st.session_state['diabetes_result']}")
-        st.write(f"**BGL Test Result:** {st.session_state['bgl_result']}")
 
         st.markdown("### BGL Severity")
         st.write(f"{st.session_state['name']}, your blood sugar is: **{st.session_state['diabetes_result']}**")
