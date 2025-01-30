@@ -22,15 +22,24 @@ def show_home():
     st.title("GlucoSense: A non-invasive diabetes monitor")
     st.write("Enter your personal information below.")
     
-    # Input fields with default values
-    name = st.text_input("Name", value="John Doe")
-    age = st.number_input("Age", min_value=0, value=30)
-    gender = st.selectbox("Gender", options=["Male", "Female", "Other"], index=0)
+    # Creating columns
+    col1, col2, col3 = st.columns(3)
+
+    # Input fields with default values in columns
+    with col1:
+        name = st.text_input("Name", value="John Doe")
+        age = st.number_input("Age", min_value=0, value=30)
+        gender = st.selectbox("Gender", options=["Male", "Female", "Other"], index=0)
+
+    with col2:
+        min_bp = st.number_input("Min BP", min_value=0, value=80)
+        max_bp = st.number_input("Max BP", min_value=0, value=120)
+
+    with col3:
+        heart_rate = st.number_input("Heart Rate", min_value=0, value=70)
+        spo2 = st.number_input("SPO2", min_value=0, max_value=100, value=95)
+
     gender = 0 if gender == "Male" else 1
-    heart_rate = st.number_input("Heart Rate", min_value=0, value=70)
-    max_bp = st.number_input("Max BP", min_value=0, value=120)
-    min_bp = st.number_input("Min BP", min_value=0, value=80)
-    spo2 = st.number_input("SPO2", min_value=0, max_value=100, value=95)
     body_vitals = {'Age': [age], 'Gender': [gender], 'Heart_Beat': [heart_rate], 'SPO2': [spo2], 'max_BP': [max_bp], 'min_BP': [min_bp]}
     body_vitals = pd.DataFrame(body_vitals)
 
