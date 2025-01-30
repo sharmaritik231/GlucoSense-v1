@@ -108,7 +108,7 @@ def show_report():
         st.dataframe(df.style.set_table_styles([
             {'selector': 'th', 'props': [('padding', '12px 10px'), ('font-size', '14px')]},
             {'selector': 'td', 'props': [('padding', '12px 10px'), ('font-size', '14px')]}
-        ]).hide(axis='index'), height=320)
+        ]).hide(axis='index'), height=350)
 
     else:
         st.warning("Please complete the test on the 'Breath Dataset' page first.")
