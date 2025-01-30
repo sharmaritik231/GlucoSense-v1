@@ -3,7 +3,7 @@ import pandas as pd
 import commons  # Make sure to import your module that contains generate_data, diabetes_test, and bgl_test
 
 def main():
-    st.title("GlucoSense - Diabetes and BGL Test")
+    st.title("GlucoSense - Non-invasive diabetes detection system")
 
     # Input fields
     name = st.text_input("Name")
@@ -12,7 +12,7 @@ def main():
     heart_rate = st.number_input("Heart Rate", min_value=0)
     max_bp = st.number_input("Max BP", min_value=0)
     min_bp = st.number_input("Min BP", min_value=0)
-    spo2 = st.number_input("SPO2", min_value=0.0, max_value=100.0, format="%.1f")
+    spo2 = st.number_input("SPO2", min_value=0, max_value=100)
 
     # File upload
     uploaded_file = st.file_uploader("Upload CSV file", type=["csv"])
