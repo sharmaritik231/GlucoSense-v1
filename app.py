@@ -28,14 +28,38 @@ def show_home():
         name = st.text_input("Name", value="John Doe")
         age = st.number_input("Age", min_value=0, value=30)
         gender = st.selectbox("Gender", options=["Male", "Female", "Other"], index=0)
-
+        
     with col2:
+        heart_rate = st.number_input("Heart Rate", min_value=0, value=70)
+        spo2 = st.number_input("SPO2", min_value=0, max_value=100, value=95)
+        
+         # File upload
+        uploaded_file = st.file_uploader("Upload CSV file", type=["csv"])
+    
+        if uploaded_file is not None:
+            # Read the CSV file
+            data = pd.read_csv(uploaded_file, skiprows=3).iloc[:, 1:]
+    
+            # Generate data for the test
+            test_data = commons.generate_data(data, st.session_state["body_vitals"])
+    
+            # Perform tests
+            reduced_features = commons.perform_feature_selection(test_data)
+            diabetes_result = commons.perform_diabetes_test(reduced_features)
+            bgl_result = commons.perform_bgl_test(reduced_features)
+    
+            # Store results in session state to access in the report page
+            st.session_state["diabetes_result"] = diabetes_result
+            st.session_state["bgl_result"] = bgl_result
+            st.success("Test Completed! Go to the 'Diabetic Report' page to see the results.")
+    
+        else:
+            st.warning("Please upload a CSV file.")
+        
+    with col3:
         min_bp = st.number_input("Min BP", min_value=0, value=80)
         max_bp = st.number_input("Max BP", min_value=0, value=120)
 
-    with col3:
-        heart_rate = st.number_input("Heart Rate", min_value=0, value=70)
-        spo2 = st.number_input("SPO2", min_value=0, max_value=100, value=95)
 
     gender = 0 if gender == "Male" else 1
     body_vitals = {'Age': [age], 'Gender': [gender], 'Heart_Beat': [heart_rate], 'SPO2': [spo2], 'max_BP': [max_bp], 'min_BP': [min_bp]}
@@ -50,29 +74,6 @@ def show_home():
     st.session_state["min_bp"] = min_bp
     st.session_state["spo2"] = spo2
     st.session_state["body_vitals"] = body_vitals
-
-    # File upload
-    uploaded_file = st.file_uploader("Upload CSV file", type=["csv"])
-
-    if uploaded_file is not None:
-        # Read the CSV file
-        data = pd.read_csv(uploaded_file, skiprows=3).iloc[:, 1:]
-
-        # Generate data for the test
-        test_data = commons.generate_data(data, st.session_state["body_vitals"])
-
-        # Perform tests
-        reduced_features = commons.perform_feature_selection(test_data)
-        diabetes_result = commons.perform_diabetes_test(reduced_features)
-        bgl_result = commons.perform_bgl_test(reduced_features)
-
-        # Store results in session state to access in the report page
-        st.session_state["diabetes_result"] = diabetes_result
-        st.session_state["bgl_result"] = bgl_result
-        st.success("Test Completed! Go to the 'Diabetic Report' page to see the results.")
-
-    else:
-        st.warning("Please upload a CSV file.")
 
 def show_report():
     st.title("GlucoSense: A non-invasive diabetes monitor")
