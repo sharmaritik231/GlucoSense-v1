@@ -29,8 +29,9 @@ def main():
             test_data = commons.generate_data(data, body_vitals)
 
             # Perform tests
-            diabetes_result = commons.perform_diabetes_test(test_data)
-            bgl_result = commons.perform_bgl_test(test_data)
+            reduced_features = commons.perform_feature_selection(test_data)
+            diabetes_result = commons.perform_diabetes_test(reduced_features)
+            bgl_result = commons.perform_bgl_test(reduced_features)
 
             # Display results
             st.write(f"Name: {name}")
