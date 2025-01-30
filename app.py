@@ -25,7 +25,7 @@ def show_home():
 
     # Input fields with default values in columns
     with col1:
-        name = st.text_input("Name", value="John Doe")
+        name = st.text_input("Name", value="Ritik Sharma")
         age = st.number_input("Age", min_value=0, value=30)
         gender = st.selectbox("Gender", options=["Male", "Female", "Other"], index=0)
         
@@ -34,7 +34,7 @@ def show_home():
         spo2 = st.number_input("SPO2", min_value=0, max_value=100, value=95)
         
          # File upload
-        uploaded_file = st.file_uploader("Upload CSV file", type=["csv"])
+        uploaded_file = st.file_uploader("Breath data from GlucoSense", type=["csv"])
     
         if uploaded_file is not None:
             # Read the CSV file
