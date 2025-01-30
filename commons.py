@@ -36,8 +36,3 @@ def generate_data(file_path):
     cleaned_df = remove_irrelevant_data(file_path)
     features_df = feature_eng.generate_features(df=cleaned_df)
     return features_df
-
-def generate_data(file_path):
-    cleaned_df = remove_irrelevant_data(file_path)
-    features_df = feature_eng.generate_features(df=cleaned_df)
-    return features_df
