@@ -73,7 +73,6 @@ def show_home():
 
 def show_report():
     st.title("GlucoSense: A non-invasive diabetes monitor")
-    st.write("Here is your detailed diabetes and BGL report.")
 
     if "diabetes_result" in st.session_state and "bgl_result" in st.session_state:
         col1, col2, col3, col4 = st.columns(4)
