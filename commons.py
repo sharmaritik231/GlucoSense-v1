@@ -27,7 +27,6 @@ def perform_bgl_test(test_data):
 
 def remove_irrelevant_data(df):
     # Read the CSV file into a DataFrame, skipping the first 3 rows and setting the 4th row as header
-    print(df)
     df.columns = ['H', 'MQ138', 'MQ2', 'SSID', 'T', 'TGS2600', 'TGS2602', 'TGS2603', 'TGS2610', 'TGS2611', 'TGS2620', 'TGS822', 'Device', 'Time', 'Age', 'Gender', 'Heart_Beat', 'SPO2', 'max_BP', 'min_BP']
     df = df.drop(['SSID', 'Device', 'H', 'T', 'Time'], axis=1)
     return df.reset_index(drop=True)
@@ -35,4 +34,5 @@ def remove_irrelevant_data(df):
 def generate_data(file_path):
     cleaned_df = remove_irrelevant_data(file_path)
     features_df = feature_eng.generate_features(df=cleaned_df)
+    print(features_df)
     return features_df
