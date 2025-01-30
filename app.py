@@ -4,16 +4,19 @@ import commons  # Make sure to import your module that contains generate_data, p
 
 def main():
     st.sidebar.title("Navigation")
-    selection = st.sidebar.selectbox("Go to", ["Home", "Diabetic Report"])
+    selection = st.sidebar.selectbox("Go to", ["Home", "Upload CSV", "Diabetes Report"])
 
     if selection == "Home":
         show_home()
-    elif selection == "Diabetic Report":
+    elif selection == "Upload CSV":
+        show_upload()
+    elif selection == "Diabetes Report":
         show_report()
 
 def show_home():
-    st.title("GlucoSense - Diabetes and BGL Test")
-
+    st.title("Home")
+    st.write("Enter your personal information below.")
+    
     # Input fields
     name = st.text_input("Name")
     age = st.number_input("Age", min_value=0)
@@ -26,39 +29,46 @@ def show_home():
     body_vitals = {'Age': [age], 'Gender': [gender], 'Heart_Beat': [heart_rate], 'SPO2': [spo2], 'max_BP': [max_bp], 'min_BP': [min_bp]}
     body_vitals = pd.DataFrame(body_vitals)
 
+    # Store personal information in session state
+    st.session_state["name"] = name
+    st.session_state["age"] = age
+    st.session_state["gender"] = gender
+    st.session_state["heart_rate"] = heart_rate
+    st.session_state["max_bp"] = max_bp
+    st.session_state["min_bp"] = min_bp
+    st.session_state["spo2"] = spo2
+    st.session_state["body_vitals"] = body_vitals
+
+def show_upload():
+    st.title("Upload CSV")
+    st.write("Upload your sensor data CSV file below.")
+
     # File upload
     uploaded_file = st.file_uploader("Upload CSV file", type=["csv"])
 
-    if st.button("Submit"):
-        if uploaded_file is not None:
-            # Read the CSV file
-            data = pd.read_csv(uploaded_file, skiprows=3).iloc[:, 1:]
+    if uploaded_file is not None:
+        # Read the CSV file
+        data = pd.read_csv(uploaded_file, skiprows=3).iloc[:, 1:]
 
-            # Generate data for the test
-            test_data = commons.generate_data(data, body_vitals)
+        # Generate data for the test
+        test_data = commons.generate_data(data, st.session_state["body_vitals"])
 
-            # Perform tests
-            reduced_features = commons.perform_feature_selection(test_data)
-            diabetes_result = commons.perform_diabetes_test(reduced_features)
-            bgl_result = commons.perform_bgl_test(reduced_features)
+        # Perform tests
+        reduced_features = commons.perform_feature_selection(test_data)
+        diabetes_result = commons.perform_diabetes_test(reduced_features)
+        bgl_result = commons.perform_bgl_test(reduced_features)
 
-            # Store results in session state to access in the report page
-            st.session_state["name"] = name
-            st.session_state["age"] = age
-            st.session_state["gender"] = gender
-            st.session_state["heart_rate"] = heart_rate
-            st.session_state["max_bp"] = max_bp
-            st.session_state["min_bp"] = min_bp
-            st.session_state["spo2"] = spo2
-            st.session_state["diabetes_result"] = diabetes_result
-            st.session_state["bgl_result"] = bgl_result
+        # Store results in session state to access in the report page
+        st.session_state["diabetes_result"] = diabetes_result
+        st.session_state["bgl_result"] = bgl_result
 
-            st.success("Test Completed! Go to the 'Diabetic Report' page to see the results.")
-        else:
-            st.warning("Please upload a CSV file.")
+        st.success("Test Completed! Go to the 'Diabetes Report' page to see the results.")
+    else:
+        st.warning("Please upload a CSV file.")
 
 def show_report():
-    st.title("Diabetic Report")
+    st.title("Diabetes Report")
+    st.write("Here is your detailed diabetes and BGL report.")
 
     if "diabetes_result" in st.session_state and "bgl_result" in st.session_state:
         st.write(f"**Name:** {st.session_state['name']}")
@@ -71,16 +81,15 @@ def show_report():
         st.write(f"**Diabetes Test Result:** {st.session_state['diabetes_result']}")
         st.write(f"**BGL Test Result:** {st.session_state['bgl_result']}")
 
-        # Display the results in a visually appealing manner
         st.markdown("### Diabetes Test Result")
         st.write(f"Your Diabetes Test Result indicates that your blood sugar level is: **{st.session_state['diabetes_result']}**")
 
         st.markdown("### Blood Glucose Level (BGL) Test Result")
         st.write(f"Your Blood Glucose Level (BGL) Test Result is: **{st.session_state['bgl_result']}**")
 
-        # You can add more visualizations or formatting here to make the report more appealing
+        # Additional visualizations or formatting can be added here
     else:
-        st.warning("Please complete the test on the 'Home' page first.")
+        st.warning("Please complete the test on the 'Upload CSV' page first.")
 
 if __name__ == "__main__":
     main()
