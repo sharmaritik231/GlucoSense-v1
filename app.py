@@ -41,7 +41,7 @@ def show_home():
 
     if st.button("Next"):
         st.session_state.page = "Breath Dataset"
-        st.experimental_set_query_params(page="Breath Dataset")
+        st.query_params(page="Breath Dataset")
 
 def show_upload():
     st.title("GlucoSense: A non-invasive diabetes monitor")
@@ -72,11 +72,11 @@ def show_upload():
     with col1:
         if st.button("Previous"):
             st.session_state.page = "Personal Information"
-            st.experimental_set_query_params(page="Personal Information")
+            st.query_params(page="Personal Information")
     with col2:
         if st.button("Next"):
             st.session_state.page = "Diabetic Report"
-            st.experimental_set_query_params(page="Diabetic Report")
+            st.query_params(page="Diabetic Report")
 
 def show_report():
     st.title("GlucoSense: A non-invasive diabetes monitor")
@@ -105,10 +105,10 @@ def show_report():
 
     if st.button("Previous"):
         st.session_state.page = "Breath Dataset"
-        st.experimental_set_query_params(page="Breath Dataset")
+        st.query_params(page="Breath Dataset")
 
 if __name__ == "__main__":
-    query_params = st.experimental_get_query_params()
+    query_params = st.query_params()
     if "page" in query_params:
         st.session_state.page = query_params["page"][0]
     main()
