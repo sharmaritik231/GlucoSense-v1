@@ -4,11 +4,11 @@ import commons  # Make sure to import your module that contains generate_data, p
 
 def main():
     st.sidebar.title("Navigation")
-    selection = st.sidebar.selectbox("Go to", ["Home", "Upload CSV", "Diabetes Report"])
+    selection = st.sidebar.selectbox("Go to", ["Personal Information", "Breath Dataset", "Diabetic Report"])
 
     if selection == "Personal Information":
         show_home()
-    elif selection == "Breath dataset":
+    elif selection == "Breath Dataset":
         show_upload()
     elif selection == "Diabetic Report":
         show_report()
@@ -17,10 +17,10 @@ def show_home():
     st.title("GlucoSense: A non-invasive diabetes monitor")
     st.write("Enter your personal information below.")
     
-    # Input fields
-    name = st.text_input("Name")
-    age = st.number_input("Age", min_value=0)
-    gender = st.selectbox("Gender", options=["Male", "Female", "Other"])
+    # Input fields with default values
+    name = st.text_input("Name", value="John Doe")
+    age = st.number_input("Age", min_value=0, value=30)
+    gender = st.selectbox("Gender", options=["Male", "Female", "Other"], index=0)
     gender = 0 if gender == "Male" else 1
     heart_rate = st.number_input("Heart Rate", min_value=0, value=70)
     max_bp = st.number_input("Max BP", min_value=0, value=120)
@@ -62,7 +62,7 @@ def show_upload():
         st.session_state["diabetes_result"] = diabetes_result
         st.session_state["bgl_result"] = bgl_result
 
-        st.success("Test Completed! Go to the 'Diabetes Report' page to see the results.")
+        st.success("Test Completed! Go to the 'Diabetic Report' page to see the results.")
     else:
         st.warning("Please upload a CSV file.")
 
@@ -82,14 +82,14 @@ def show_report():
         st.write(f"**BGL Test Result:** {st.session_state['bgl_result']}")
 
         st.markdown("### BGL Severity")
-        st.write(f"{name}, blood sugar level is: **{st.session_state['diabetes_result']}**")
+        st.write(f"{st.session_state['name']}, your blood sugar level is: **{st.session_state['diabetes_result']}**")
 
         st.markdown("### Blood Glucose Level (mg/dL)")
-        st.write(f"{name}, Your BGL is: **{st.session_state['bgl_result']} mg/dL**")
+        st.write(f"{st.session_state['name']}, your BGL is: **{st.session_state['bgl_result']} mg/dL**")
 
         # Additional visualizations or formatting can be added here
     else:
-        st.warning("Please complete the test on the 'Upload CSV' page first.")
+        st.warning("Please complete the test on the 'Breath Dataset' page first.")
 
 if __name__ == "__main__":
     main()
