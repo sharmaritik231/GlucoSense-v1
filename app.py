@@ -70,16 +70,6 @@ def show_upload():
         st.success("Test Completed! Go to the 'Diabetic Report' page to see the results.")
 
         # Visualizations
-        st.header("Visualizations")
-        fig, ax = plt.subplots()
-        sns.heatmap(test_data.corr(), annot=True, fmt=".2f", cmap='coolwarm', ax=ax)
-        st.pyplot(fig)
-
-        fig, ax = plt.subplots()
-        sns.scatterplot(data=test_data, x='Heart_Beat', y='max_BP', hue='Diabetes', ax=ax)
-        ax.set_title('Heart Rate vs. Max BP')
-        st.pyplot(fig)
-
         fig, ax = plt.subplots()
         sns.scatterplot(data=test_data, x='Age', y='min_BP', hue='BGL', ax=ax)
         ax.set_title('Age vs. Min BP')
