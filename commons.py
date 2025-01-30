@@ -26,9 +26,9 @@ def perform_bgl_test(test_data):
     bgl_value = bgl_model.predict(features)[0]
     return np.round(bgl_value, 2)
 
-def remove_irrelevant_data(file_path):
+def remove_irrelevant_data(df):
     # Read the CSV file into a DataFrame, skipping the first 3 rows and setting the 4th row as header
-    df = pd.read_csv(file_path, skiprows=3).iloc[:, 1:]
+    df = df.iloc[:, 1:]
     df.columns = ['H', 'MQ138', 'MQ2', 'SSID', 'T', 'TGS2600', 'TGS2602', 'TGS2603', 'TGS2610', 'TGS2611', 'TGS2620', 'TGS822', 'Device', 'Time']
     df = df.drop(['SSID', 'Device', 'H', 'T', 'Time'], axis=1)
     return df.reset_index(drop=True)
