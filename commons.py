@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import pickle
 import feature_eng
+import constants
 
 def load_model(file_path):
     with open(file_path, mode='rb') as my_file:
@@ -31,7 +32,7 @@ def remove_irrelevant_data(file_path):
     df = df.drop(['SSID', 'Device', 'H', 'T', 'Time'], axis=1)
     return df.reset_index(drop=True)
 
-def generate_data(file_path, sensor_cols):
+def generate_data(file_path, sensor_cols=constants.SENSOR_COLS):
     cleaned_df = remove_irrelevant_data(file_path)
     features_df = feature_eng.generate_features(df=cleaned_df, sensor_cols=sensor_cols)
     return features_df
