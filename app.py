@@ -1,6 +1,11 @@
 import streamlit as st
 import pandas as pd
 import commons  # Make sure to import your module that contains generate_data, perform_feature_selection, perform_diabetes_test, and perform_bgl_test
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Increase the width of the content
+st.set_page_config(layout="wide")
 
 def main():
     st.sidebar.title("Navigation")
@@ -63,6 +68,23 @@ def show_upload():
         st.session_state["bgl_result"] = bgl_result
 
         st.success("Test Completed! Go to the 'Diabetic Report' page to see the results.")
+
+        # Visualizations
+        st.header("Visualizations")
+        fig, ax = plt.subplots()
+        sns.heatmap(test_data.corr(), annot=True, fmt=".2f", cmap='coolwarm', ax=ax)
+        st.pyplot(fig)
+
+        fig, ax = plt.subplots()
+        sns.scatterplot(data=test_data, x='Heart_Beat', y='max_BP', hue='Diabetes', ax=ax)
+        ax.set_title('Heart Rate vs. Max BP')
+        st.pyplot(fig)
+
+        fig, ax = plt.subplots()
+        sns.scatterplot(data=test_data, x='Age', y='min_BP', hue='BGL', ax=ax)
+        ax.set_title('Age vs. Min BP')
+        st.pyplot(fig)
+
     else:
         st.warning("Please upload a CSV file.")
 
