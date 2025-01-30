@@ -27,14 +27,18 @@ def perform_bgl_test(test_data):
     return np.round(bgl_value, 2)
 
 def remove_irrelevant_data(file_path):
+    # Read the CSV file into a DataFrame, skipping the first 3 rows and setting the 4th row as header
     df = pd.read_csv(file_path, skiprows=3).iloc[:, 1:]
     df.columns = ['H', 'MQ138', 'MQ2', 'SSID', 'T', 'TGS2600', 'TGS2602', 'TGS2603', 'TGS2610', 'TGS2611', 'TGS2620', 'TGS822', 'Device', 'Time']
     df = df.drop(['SSID', 'Device', 'H', 'T', 'Time'], axis=1)
     return df.reset_index(drop=True)
 
+def generate_data(file_path):
+    cleaned_df = remove_irrelevant_data(file_path)
+    features_df = feature_eng.generate_features(df=cleaned_df)
+    return features_df
+
 def generate_data(file_path, sensor_cols=constants.SENSOR_COLS):
     cleaned_df = remove_irrelevant_data(file_path)
     features_df = feature_eng.generate_features(df=cleaned_df, sensor_cols=sensor_cols)
     return features_df
-
-# Removed unused functions and tkinter-related code
