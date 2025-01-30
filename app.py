@@ -9,7 +9,7 @@ st.set_page_config(layout="wide")
 
 def main():
     st.sidebar.title("Navigation")
-    selection = st.sidebar.selectbox("Go to", ["Personal Information", "Breath Dataset", "Diabetic Report"])
+    selection = st.sidebar.selectbox("Go to", ["Personal Information", "Diabetic Report"])
 
     if selection == "Personal Information":
         show_home()
@@ -59,7 +59,6 @@ def show_home():
     with col3:
         min_bp = st.number_input("Min BP", min_value=0, value=80)
         max_bp = st.number_input("Max BP", min_value=0, value=120)
-
 
     gender = 0 if gender == "Male" else 1
     body_vitals = {'Age': [age], 'Gender': [gender], 'Heart_Beat': [heart_rate], 'SPO2': [spo2], 'max_BP': [max_bp], 'min_BP': [min_bp]}
