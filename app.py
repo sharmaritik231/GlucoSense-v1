@@ -90,7 +90,7 @@ def show_report():
         st.write(f"{st.session_state['name']}, your blood sugar level is: **{st.session_state['diabetes_result']}**")
 
         st.markdown("### Blood Glucose Level (BGL) Visualization")
-        fig, ax = plt.subplots(figsize=(6, 4))
+        fig, ax = plt.subplots(figsize=(3, 2))
         bgl_value = st.session_state["bgl_result"]
         bars = ax.bar(["BGL"], [bgl_value], color="blue")
         
