@@ -53,10 +53,6 @@ def show_home():
     st.session_state["spo2"] = spo2
     st.session_state["body_vitals"] = body_vitals
 
-def show_upload():
-    st.title("GlucoSense: A non-invasive diabetes monitor")
-    st.write("Upload your breath profiles data obtained from the device.")
-
     # File upload
     uploaded_file = st.file_uploader("Upload CSV file", type=["csv"])
 
