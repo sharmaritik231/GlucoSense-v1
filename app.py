@@ -20,7 +20,7 @@ def main():
     if st.button("Submit"):
         if uploaded_file is not None:
             # Read the CSV file
-            data = pd.read_csv(uploaded_file, skiprows=3)
+            data = pd.read_csv(uploaded_file, skiprows=3).iloc[:, 1:]
 
             # Generate data for the test
             data['Age'] = age
