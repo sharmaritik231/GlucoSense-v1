@@ -91,7 +91,7 @@ def show_report():
             ]
         }
         df = pd.DataFrame(data)
-        st.write(df)
+        st.table(df)
 
     else:
         st.warning("Please complete the test on the 'Breath Dataset' page first.")
