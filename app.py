@@ -90,7 +90,7 @@ def show_report():
                 st.session_state['bgl_result']
             ]
         }
-        df = pd.DataFrame(data)
+        df = pd.Series(data['Value'], index=data['Parameter'])
         st.table(df)
 
     else:
