@@ -87,29 +87,10 @@ def show_report():
         st.write(f"**BGL Test Result:** {st.session_state['bgl_result']}")
 
         st.markdown("### BGL Severity")
-        st.write(f"{st.session_state['name']}, your blood sugar level is: **{st.session_state['diabetes_result']}**")
+        st.write(f"{st.session_state['name']}, your blood sugar is: **{st.session_state['diabetes_result']}**")
 
-        st.markdown("### Blood Glucose Level (BGL) Visualization")
-        fig, ax = plt.subplots(figsize=(3, 2))
-        bgl_value = st.session_state["bgl_result"]
-        bars = ax.bar(["BGL"], [bgl_value], color="blue")
-        
-        # Add value above the bar
-        for bar in bars:
-            yval = bar.get_height()
-            ax.text(bar.get_x() + bar.get_width()/2.0, yval, round(yval, 2), ha='center', va='bottom')
-        
-        # Mark thresholds
-        prediabetes_range = (140, 199)
-        diabetes_range = (200, 500)
-        
-        ax.axhline(y=prediabetes_range[0], color='orange', linestyle='--', label='Prediabetic')
-        ax.axhline(y=diabetes_range[0], color='red', linestyle='--', label='Diabetic')
-        
-        ax.legend()
-        ax.set_title("Blood Glucose Level (BGL)")
-        ax.set_ylabel("BGL (mg/dL)")
-        st.pyplot(fig)
+        st.markdown("### Blood Glucose Level (mg/dL)")
+        st.write(f"{st.session_state['name']}, your BGL is: **{st.session_state['bgl_result']}**")
 
     else:
         st.warning("Please complete the test on the 'Breath Dataset' page first.")
