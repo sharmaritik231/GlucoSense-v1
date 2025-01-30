@@ -2,7 +2,6 @@ import numpy as np
 import pandas as pd
 import pickle
 import feature_eng
-import constants
 
 def load_model(file_path):
     with open(file_path, mode='rb') as my_file:
