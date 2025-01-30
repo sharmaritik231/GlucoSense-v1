@@ -76,9 +76,9 @@ def show_report():
     st.write("Here is your detailed diabetes and BGL report.")
 
     if "diabetes_result" in st.session_state and "bgl_result" in st.session_state:
-        st.write(f"**Name:** {st.session_state['name']}")
-        st.write(f"**Age:** {st.session_state['age']}")
-        st.write(f"**Gender:** {'Male' if st.session_state['gender'] == 0 else 'Female'}")
+        st.info(f"**Name:** {st.session_state['name']}")
+        st.info(f"**Age:** {st.session_state['age']}")
+        st.info(f"**Gender:** {'Male' if st.session_state['gender'] == 0 else 'Female'}")
         
         st.metric(label="Heart Rate", value=f"{st.session_state['heart_rate']} bpm")
         st.metric(label="Max BP", value=f"{st.session_state['max_bp']} mmHg")
