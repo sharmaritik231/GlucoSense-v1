@@ -6,15 +6,15 @@ def main():
     st.sidebar.title("Navigation")
     selection = st.sidebar.selectbox("Go to", ["Home", "Upload CSV", "Diabetes Report"])
 
-    if selection == "Home":
+    if selection == "Personal Information":
         show_home()
-    elif selection == "Upload CSV":
+    elif selection == "Breath dataset":
         show_upload()
-    elif selection == "Diabetes Report":
+    elif selection == "Diabetic Report":
         show_report()
 
 def show_home():
-    st.title("Home")
+    st.title("GlucoSense: A non-invasive diabetes monitor")
     st.write("Enter your personal information below.")
     
     # Input fields
@@ -22,10 +22,10 @@ def show_home():
     age = st.number_input("Age", min_value=0)
     gender = st.selectbox("Gender", options=["Male", "Female", "Other"])
     gender = 0 if gender == "Male" else 1
-    heart_rate = st.number_input("Heart Rate", min_value=0)
-    max_bp = st.number_input("Max BP", min_value=0)
-    min_bp = st.number_input("Min BP", min_value=0)
-    spo2 = st.number_input("SPO2", min_value=0, max_value=100)
+    heart_rate = st.number_input("Heart Rate", min_value=0, value=70)
+    max_bp = st.number_input("Max BP", min_value=0, value=120)
+    min_bp = st.number_input("Min BP", min_value=0, value=80)
+    spo2 = st.number_input("SPO2", min_value=0, max_value=100, value=95)
     body_vitals = {'Age': [age], 'Gender': [gender], 'Heart_Beat': [heart_rate], 'SPO2': [spo2], 'max_BP': [max_bp], 'min_BP': [min_bp]}
     body_vitals = pd.DataFrame(body_vitals)
 
@@ -40,8 +40,8 @@ def show_home():
     st.session_state["body_vitals"] = body_vitals
 
 def show_upload():
-    st.title("Upload CSV")
-    st.write("Upload your sensor data CSV file below.")
+    st.title("GlucoSense: A non-invasive diabetes monitor")
+    st.write("Upload your breath profiles data obtained from the device.")
 
     # File upload
     uploaded_file = st.file_uploader("Upload CSV file", type=["csv"])
@@ -67,7 +67,7 @@ def show_upload():
         st.warning("Please upload a CSV file.")
 
 def show_report():
-    st.title("Diabetes Report")
+    st.title("GlucoSense: A non-invasive diabetes monitor")
     st.write("Here is your detailed diabetes and BGL report.")
 
     if "diabetes_result" in st.session_state and "bgl_result" in st.session_state:
@@ -81,11 +81,11 @@ def show_report():
         st.write(f"**Diabetes Test Result:** {st.session_state['diabetes_result']}")
         st.write(f"**BGL Test Result:** {st.session_state['bgl_result']}")
 
-        st.markdown("### Diabetes Test Result")
-        st.write(f"Your Diabetes Test Result indicates that your blood sugar level is: **{st.session_state['diabetes_result']}**")
+        st.markdown("### BGL Severity")
+        st.write(f"{name}, blood sugar level is: **{st.session_state['diabetes_result']}**")
 
-        st.markdown("### Blood Glucose Level (BGL) Test Result")
-        st.write(f"Your Blood Glucose Level (BGL) Test Result is: **{st.session_state['bgl_result']}**")
+        st.markdown("### Blood Glucose Level (mg/dL)")
+        st.write(f"{name}, Your BGL is: **{st.session_state['bgl_result']} mg/dL**")
 
         # Additional visualizations or formatting can be added here
     else:
