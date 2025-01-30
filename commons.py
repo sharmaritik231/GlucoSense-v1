@@ -41,3 +41,38 @@ def generate_data(sensors_data, body_vitals):
     features_df = feature_eng.generate_features(df=cleaned_df)
     final_df = pd.concat([body_vitals, features_df], axis=1)
     return final_df
+
+class RemoveHighlyCorrelatedFeatures(BaseEstimator, TransformerMixin):
+    def __init__(self, threshold=0.9):
+        self.threshold = threshold
+        self.to_drop_ = None
+
+    def fit(self, X, y=None):
+        # Calculate the correlation matrix
+        corr_matrix = X.corr().abs()
+
+        # Select upper triangle of correlation matrix
+        upper = corr_matrix.where(np.triu(np.ones(corr_matrix.shape), k=1).astype(bool))
+
+        # Find features with correlation greater than the specified threshold
+        self.to_drop_ = [column for column in upper.columns if any(upper[column] >= self.threshold)]
+        return self
+
+    def transform(self, X, y=None):
+        # Drop the highly correlated features
+        if self.to_drop_ is not None:
+            return X.drop(columns=self.to_drop_)
+        else:
+            return X
+
+    def fit_transform(self, X, y=None, **fit_params):
+        # Use the fit method and then the transform method
+        return super().fit_transform(X, y, **fit_params)
+
+    def __getstate__(self):
+        # Return the object's state as a dictionary
+        return self.__dict__
+
+    def __setstate__(self, state):
+        # Restore the object's state from the dictionary
+        self.__dict__.update(state)
