@@ -18,6 +18,11 @@ def perform_diabetes_test(test_data):
     else:
         return "Your Blood sugar is High"
 
+def perform_feature_selection(test_data):
+    selector = load_model("models/selector.pkl")
+    names = test_data.columns[selector.get_support()]
+    return pd.DataFrame(data=selector.transform(test_data), columns=names)
+
 def perform_bgl_test(test_data):
     scaler = load_model("models/coll_scaler.pkl")
     features = scaler.transform(test_data)
