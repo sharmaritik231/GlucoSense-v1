@@ -91,21 +91,7 @@ def show_report():
             ]
         }
         df = pd.DataFrame(data)
-
-        # Apply CSS to make the table more compact
-        st.markdown("""
-            <style>
-            .report-table th, .report-table td {
-                padding: 4px 8px;
-                font-size: 14px;
-            }
-            </style>
-            """, unsafe_allow_html=True)
-
-        st.dataframe(df.style.set_table_styles([
-            {'selector': 'th', 'props': [('padding', '4px 8px'), ('font-size', '14px')]},
-            {'selector': 'td', 'props': [('padding', '4px 8px'), ('font-size', '14px')]}
-        ]), height=300)
+        st.table(df)
 
     else:
         st.warning("Please complete the test on the 'Breath Dataset' page first.")
