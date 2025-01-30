@@ -92,16 +92,6 @@ def show_report():
         st.markdown("### Blood Glucose Level (mg/dL)")
         st.write(f"{st.session_state['name']}, your BGL is: **{st.session_state['bgl_result']} mg/dL**")
 
-        # Visualize body vitals
-        st.markdown("### Body Vitals Visualization")
-        body_vitals = st.session_state["body_vitals"].copy()
-        body_vitals_melted = body_vitals.melt(var_name="Vital", value_name="Value")
-        
-        fig, ax = plt.subplots()
-        sns.barplot(data=body_vitals_melted, x="Vital", y="Value", ax=ax)
-        ax.set_title("Body Vitals")
-        st.pyplot(fig)
-
         # Visualize BGL with thresholds
         st.markdown("### Blood Glucose Level (BGL) Visualization")
         fig, ax = plt.subplots()
