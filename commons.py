@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import pickle
 import feature_eng
+from sklearn.base import BaseEstimator, TransformerMixin
 
 def load_model(file_path):
     with open(file_path, mode='rb') as my_file:
