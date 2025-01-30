@@ -106,9 +106,9 @@ def show_report():
             """, unsafe_allow_html=True)
 
         st.dataframe(df.style.set_table_styles([
-            {'selector': 'th', 'props': [('padding', '4px 8px'), ('font-size', '14px')]},
-            {'selector': 'td', 'props': [('padding', '4px 8px'), ('font-size', '14px')]}
-        ]).hide(axis='index'), height=300)
+            {'selector': 'th', 'props': [('padding', '6px 10px'), ('font-size', '14px')]},
+            {'selector': 'td', 'props': [('padding', '6px 10px'), ('font-size', '14px')]}
+        ]).hide(axis='index'), height=400)
 
     else:
         st.warning("Please complete the test on the 'Breath Dataset' page first.")
