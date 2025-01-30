@@ -66,14 +66,7 @@ def show_upload():
         # Store results in session state to access in the report page
         st.session_state["diabetes_result"] = diabetes_result
         st.session_state["bgl_result"] = bgl_result
-
         st.success("Test Completed! Go to the 'Diabetic Report' page to see the results.")
-
-        # Visualizations
-        fig, ax = plt.subplots()
-        sns.scatterplot(data=test_data, x='Age', y='min_BP', hue='BGL', ax=ax)
-        ax.set_title('Age vs. Min BP')
-        st.pyplot(fig)
 
     else:
         st.warning("Please upload a CSV file.")
