@@ -99,13 +99,13 @@ def show_report():
         ax.bar(["BGL"], [bgl_value], color="blue")
         
         # Mark thresholds
-        normal_range = (70, 140)
+        normal_range = (100, 140)
         prediabetes_range = (140, 199)
         diabetes_range = (200, 500)
 
         ax.axhline(y=normal_range[1], color='green', linestyle='--', label='Normal Upper Limit')
-        ax.axhline(y=prediabetes_range[1], color='orange', linestyle='--', label='Prediabetes Upper Limit')
-        ax.axhline(y=diabetes_range[1], color='red', linestyle='--', label='Diabetes Upper Limit')
+        ax.axhline(y=prediabetes_range[0], color='orange', linestyle='--', label='Prediabetes Upper Limit')
+        ax.axhline(y=diabetes_range[0], color='red', linestyle='--', label='Diabetes Upper Limit')
 
         ax.legend()
         ax.set_title("Blood Glucose Level (BGL)")
