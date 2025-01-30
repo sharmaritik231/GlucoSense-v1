@@ -5,7 +5,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Increase the width of the content for all pages
-# st.set_page_config(layout="wide")
+st.set_page_config(layout="wide")
 
 def main():
     st.sidebar.title("Navigation")
@@ -13,8 +13,6 @@ def main():
 
     if selection == "Personal Information":
         show_home()
-    elif selection == "Breath Dataset":
-        show_upload()
     elif selection == "Diabetic Report":
         show_report()
 
