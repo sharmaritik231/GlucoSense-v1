@@ -89,12 +89,9 @@ def show_report():
         st.markdown("### BGL Severity")
         st.write(f"{st.session_state['name']}, your blood sugar level is: **{st.session_state['diabetes_result']}**")
 
-        st.markdown("### Blood Glucose Level (mg/dL)")
-        st.write(f"{st.session_state['name']}, your BGL is: **{st.session_state['bgl_result']} mg/dL**")
-
         # Visualize BGL with thresholds
         st.markdown("### Blood Glucose Level (BGL) Visualization")
-        fig, ax = plt.subplots(figsize=(10, 5)
+        fig, ax = plt.subplots(figsize=(10, 5))
         bgl_value = st.session_state["bgl_result"]
         ax.bar(["BGL"], [bgl_value], color="blue")
         
