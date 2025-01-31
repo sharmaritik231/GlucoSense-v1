@@ -21,7 +21,7 @@ def show_home():
     st.markdown("""
     GlucoSense is an AI-powered web application designed to predict diabetes non-invasively using breath-based sensor data and physiological parameters. This tool leverages machine learning algorithms to classify individuals into three categories—non-diabetic, prediabetic, and highly diabetic—based on volatile organic compound (VOC) responses from breath samples, along with body vitals and demographic details.
 
-    Key Features: <br?
+    ### Key Features:
     - **Non-Invasive Prediction** – Eliminates the need for painful blood tests by analyzing breath samples.
     - **Advanced Machine Learning** – Utilizes frequency-domain filtering (FFT) and feature extraction for high-accuracy classification.
     - **Real-Time Data Processing** – Connects with an ESP32 microcontroller to wirelessly receive and analyze data.
