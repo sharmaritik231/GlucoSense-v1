@@ -13,11 +13,11 @@ def perform_diabetes_test(test_data):
     model = load_model('models/RF.pkl')
     test_label = model.predict(test_data)
     if test_label == 0:
-        return "Low"
+        return "Non-diabetic"
     elif test_label == 1:
-        return "Medium"
+        return "Pre-diabetic"
     else:
-        return "High"
+        return "Highly diabetic"
 
 def perform_feature_selection(test_data):
     selector = load_model("models/selector.pkl")
