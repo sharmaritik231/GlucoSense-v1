@@ -9,11 +9,11 @@ st.set_page_config(layout="wide")
 
 def main():
     st.sidebar.title("Navigation")
-    selection = st.sidebar.selectbox("Go to", ["Personal Information", "Diabetic Report"])
+    selection = st.sidebar.selectbox("Go to", ["Body Vitals", "Report"])
 
-    if selection == "Personal Information":
+    if selection == "Body Vitals":
         show_home()
-    elif selection == "Diabetic Report":
+    elif selection == "Report":
         show_report()
 
 def show_home():
