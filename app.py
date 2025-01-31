@@ -81,6 +81,10 @@ def show_home():
 
 def show_report():
     st.title("GlucoSense: A non-invasive diabetes monitor")
+    st.markdown("""
+    The Diabetes Report page in GlucoSense provides a detailed analysis of an individual's health status based on breath-based sensor data and physiological parameters. 
+    This report offers valuable insights into diabetes classification—non-diabetic, prediabetic, or highly diabetic—using advanced machine learning techniques.
+    """)
 
     if "diabetes_result" in st.session_state and "bgl_result" in st.session_state:
         col1, col2, col3, col4 = st.columns(4)
