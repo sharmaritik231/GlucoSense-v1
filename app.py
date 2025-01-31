@@ -87,11 +87,11 @@ def show_report():
 
         with col3:
             st.metric(label="Heart Rate", value=f"{st.session_state['heart_rate']} bpm")
-            st.metric(label="SPO2", value=f"{st.session_state['spo2']} %")
+            st.metric(label="SPO2 (%)", value=f"{st.session_state['spo2']}")
 
         with col4:
             st.metric(label="BGL Severity", value=st.session_state['diabetes_result'])
-            st.metric(label="Blood Glucose Level (mg/dL)", value=f"{st.session_state['bgl_result']} mg/dL")
+            st.metric(label="Blood Glucose Level (mg/dL)", value=f"{st.session_state['bgl_result']}")
 
     else:
         st.warning("Please complete the test on the 'Breath Dataset' page first.")
