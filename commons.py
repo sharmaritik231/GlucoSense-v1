@@ -10,7 +10,7 @@ def load_model(file_path):
     return model
 
 def perform_diabetes_test(test_data):
-    model = load_model('models/stack.pkl')
+    model = load_model('models/RF.pkl')
     test_label = model.predict(test_data)
     if test_label == 0:
         return "Non-diabetic"
