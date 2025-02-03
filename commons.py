@@ -44,7 +44,7 @@ def generate_data(sensors_data, body_vitals):
     return final_df
 
 class RemoveHighlyCorrelatedFeatures(BaseEstimator, TransformerMixin):
-    def __init__(self, threshold=0.9):
+    def __init__(self, threshold=0.7):
         self.threshold = threshold
         self.to_drop_ = None
 
