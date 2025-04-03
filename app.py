@@ -17,7 +17,7 @@ def main():
         show_report()
 
 def show_home():
-    st.title("GlucoSense: A non-invasive diabetes monitor")
+    st.title("GlucoSense: A non-invasive Blood Glucose monitor")
     st.markdown("""
     GlucoSense is an AI-powered web application designed to predict diabetes non-invasively using breath-based sensor data and physiological parameters. This tool leverages machine learning algorithms to classify individuals into three categories—non-diabetic, prediabetic, and highly diabetic—based on volatile organic compound (VOC) responses from breath samples, along with body vitals and demographic details.
 
