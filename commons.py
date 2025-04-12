@@ -28,6 +28,8 @@ def perform_feature_selection(test_data):
     features = pd.DataFrame(data=selector1.transform(test_data), columns=selected_names)
     
     X_new = selector2.transform(test_data)
+    
+    print(X_new.columns)
     return normalizer.transform(X_new)
 
 def perform_bgl_test(test_data):
