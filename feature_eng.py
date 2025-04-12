@@ -153,7 +153,7 @@ def generate_features(df):
         sensor_feature_names += [f"{constants.SENSOR_COLS[n]}_{name}" for name in integral_names]
         sensor_feature_names += [f"{constants.SENSOR_COLS[n]}_{name}" for name in fft_names]
 
-    feature_names = constants.SINGULAR_COLS[:-1] + sensor_feature_names
+    feature_names = constants.TEST_SINGULAR_NAMES + sensor_feature_names
 
     feature_vector = []
     for sensor_name in constants.SENSOR_COLS:
