@@ -22,11 +22,11 @@ def perform_diabetes_test(test_data):
 def perform_feature_selection(test_data):
     selector = load_model("models/selector.pkl")
     names = test_data.columns[selector.get_support()]
-    return pd.DataFrame(data=selector.transform(test_data), columns=names)
+    features = pd.DataFrame(data=selector.transform(test_data), columns=names)
+    scaler = load_model("models/coll_scaler.pkl")
+    return scaler.transform(test_data)
 
 def perform_bgl_test(test_data):
-    scaler = load_model("models/coll_scaler.pkl")
-    features = scaler.transform(test_data)
     bgl_model = load_model(file_path='models/AdaBoost.pkl')
     bgl_value = bgl_model.predict(features)[0]
     return np.round(bgl_value, 2)
