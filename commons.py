@@ -27,7 +27,7 @@ def perform_feature_selection(test_data):
     selected_names = test_data.columns[selector1.get_support()]
     features = pd.DataFrame(data=selector1.transform(test_data), columns=selected_names)
     
-    X_new = selector2.transform(test_data)
+    X_new = selector2.transform(features)
     
     print(X_new.columns)
     return normalizer.transform(X_new)
