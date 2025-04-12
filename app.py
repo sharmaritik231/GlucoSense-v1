@@ -66,7 +66,7 @@ def show_home():
             st.warning("Please upload a CSV file.")
         
     gender = 0 if gender == "Male" else 1
-    body_vitals = {'Age': [age], 'Gender': [gender], 'Heart_Beat': [heart_rate], 'SPO2': [spo2], 'max_BP': [max_bp], 'min_BP': [min_bp]}
+    body_vitals = {'Age': [age], 'Gender': [gender], 'HR': [heart_rate], 'SPO2': [spo2], 'maxBP': [max_bp], 'minBP': [min_bp]}
     body_vitals = pd.DataFrame(body_vitals)
 
     # Store personal information in session state
