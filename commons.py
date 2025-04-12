@@ -10,7 +10,7 @@ def load_model(file_path):
     return model
 
 def perform_diabetes_test(features):
-    model = load_model('models/vote.pkl')
+    model = load_model('models/stack.pkl')
     test_label = model.predict(features)
     if test_label == 0:
         return "Non-diabetic"
