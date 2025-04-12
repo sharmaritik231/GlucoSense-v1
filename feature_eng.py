@@ -6,12 +6,12 @@ from scipy.signal import find_peaks
 
 def compute_magnitude_features(signal_samples):
     if len(signal_samples) > 1:
-        mean_amplitude = np.mean(signal_samples)
+        mean = np.mean(signal_samples)
         std = np.std(signal_samples)
         iqr = np.percentile(signal_samples, 75) - np.percentile(signal_samples, 25)
         ptp_amplitude = np.ptp(signal_samples)
         rms = np.sqrt(np.mean(np.square(signal_samples)))
-        return [mean_amplitude, std, iqr, ptp_amplitude, rms]
+        return [mean, std, iqr, ptp_amplitude, rms]
     else:
         return [0] * 5
 
@@ -107,7 +107,6 @@ def find_true_peak(signal, prominence_range=(0.1, 5), width_range=(20, 80)):
     else:
         return np.argmax(signal)
 
-
 def find_active_point(smoothed_signal, peak_index):
     derivatives = np.gradient(smoothed_signal)
     point_B = 0
@@ -119,7 +118,6 @@ def find_active_point(smoothed_signal, peak_index):
             break
     return point_B
 
-
 def find_decay_point(smoothed_signal, peak_index, decay_duration=20):
     derivatives = np.gradient(smoothed_signal)
     point_C = peak_index
@@ -130,14 +128,12 @@ def find_decay_point(smoothed_signal, peak_index, decay_duration=20):
             break
     return point_C
 
-
 def filter_signal(smoothed_signal):
     peak_index = find_true_peak(smoothed_signal)  # True Peak of the signal!
     point_B = find_active_point(smoothed_signal, peak_index)  # Point B (start of continuous rise) after baseline!
     point_C = find_decay_point(smoothed_signal, peak_index)  # Point C (start of continuous decay)
     filtered_signal = smoothed_signal[point_B: point_C + 1]
     return filtered_signal
-
 
 def generate_features(df):
     magnitude_names = ['MEAN', 'STD', 'IQR', 'PTP', 'RMS']
@@ -152,8 +148,6 @@ def generate_features(df):
         sensor_feature_names += [f"{constants.SENSOR_COLS[n]}_{name}" for name in derivative_names]
         sensor_feature_names += [f"{constants.SENSOR_COLS[n]}_{name}" for name in integral_names]
         sensor_feature_names += [f"{constants.SENSOR_COLS[n]}_{name}" for name in fft_names]
-
-    feature_names = constants.TEST_SINGULAR_NAMES + sensor_feature_names
 
     feature_vector = []
     for sensor_name in constants.SENSOR_COLS:
