@@ -20,11 +20,15 @@ def perform_diabetes_test(test_data):
         return "Highly diabetic"
 
 def perform_feature_selection(test_data):
-    selector = load_model("models/selector.pkl")
-    names = test_data.columns[selector.get_support()]
-    features = pd.DataFrame(data=selector.transform(test_data), columns=names)
-    scaler = load_model("models/outlier_scaler.pkl")
-    return scaler.transform(test_data)
+    selector1 = load_model("models/selector.pkl")
+    selector2 = load_model("models/corr_scaler.pkl")
+    normalizer = load_model("models/normalizer.pkl")
+    
+    names = test_data.columns[selector1.get_support()]
+    features = pd.DataFrame(data=selector1.transform(test_data), columns=names)
+    
+    X_new = selector2.transform(test_data)
+    return normalizer.transform(X_new)
 
 def perform_bgl_test(test_data):
     bgl_model = load_model(file_path='models/AdaBoost.pkl')
