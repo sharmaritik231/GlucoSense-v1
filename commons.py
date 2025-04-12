@@ -10,7 +10,7 @@ def load_model(file_path):
     return model
 
 def perform_diabetes_test(test_data):
-    model = load_model('models/RF.pkl')
+    model = load_model('models/vote.pkl')
     test_label = model.predict(test_data)
     if test_label == 0:
         return "Non-diabetic"
@@ -23,7 +23,7 @@ def perform_feature_selection(test_data):
     selector = load_model("models/selector.pkl")
     names = test_data.columns[selector.get_support()]
     features = pd.DataFrame(data=selector.transform(test_data), columns=names)
-    scaler = load_model("models/coll_scaler.pkl")
+    scaler = load_model("models/outlier_scaler.pkl")
     return scaler.transform(test_data)
 
 def perform_bgl_test(test_data):
@@ -44,36 +44,41 @@ def generate_data(sensors_data, body_vitals):
     return final_df
 
 class RemoveHighlyCorrelatedFeatures(BaseEstimator, TransformerMixin):
-    def __init__(self, threshold=0.7):
+    def __init__(self, threshold=0.75):
         self.threshold = threshold
         self.to_drop_ = None
 
     def fit(self, X, y=None):
-        # Calculate the correlation matrix
-        corr_matrix = X.corr().abs()
-
+        # Compute the Spearman correlation matrix
+        corr_matrix = X.corr(method='spearman').abs()
+        
         # Select upper triangle of correlation matrix
         upper = corr_matrix.where(np.triu(np.ones(corr_matrix.shape), k=1).astype(bool))
-
-        # Find features with correlation greater than the specified threshold
-        self.to_drop_ = [column for column in upper.columns if any(upper[column] >= self.threshold)]
+        
+        # Identify correlated feature pairs
+        correlated_pairs = [(col, row) for col in upper.columns for row in upper.index if upper.at[row, col] >= self.threshold]
+        
+        # Determine which feature to drop based on variance
+        drop_set = set()
+        for col, row in correlated_pairs:
+            if X[col].var() >= X[row].var():
+                drop_set.add(row)  # Drop the feature with lower variance
+            else:
+                drop_set.add(col)
+        
+        self.to_drop_ = list(drop_set)
         return self
 
     def transform(self, X, y=None):
-        # Drop the highly correlated features
-        if self.to_drop_ is not None:
-            return X.drop(columns=self.to_drop_)
-        else:
-            return X
+        return X.drop(columns=self.to_drop_, errors='ignore')
 
     def fit_transform(self, X, y=None, **fit_params):
-        # Use the fit method and then the transform method
-        return super().fit_transform(X, y, **fit_params)
+        self.fit(X, y)
+        return self.transform(X)
 
     def __getstate__(self):
-        # Return the object's state as a dictionary
         return self.__dict__
 
     def __setstate__(self, state):
-        # Restore the object's state from the dictionary
         self.__dict__.update(state)
+
