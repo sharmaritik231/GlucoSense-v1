@@ -9,9 +9,9 @@ def load_model(file_path):
         model = pickle.load(my_file)
     return model
 
-def perform_diabetes_test(test_data):
+def perform_diabetes_test(features):
     model = load_model('models/vote.pkl')
-    test_label = model.predict(test_data)
+    test_label = model.predict(features)
     if test_label == 0:
         return "Non-diabetic"
     elif test_label == 1:
@@ -30,7 +30,7 @@ def perform_feature_selection(test_data):
     X_new = selector2.transform(features)
     return normalizer.transform(X_new)
 
-def perform_bgl_test(test_data):
+def perform_bgl_test(features):
     bgl_model = load_model(file_path='models/AdaBoost.pkl')
     bgl_value = bgl_model.predict(features)[0]
     return np.round(bgl_value, 2)
