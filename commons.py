@@ -24,17 +24,10 @@ def perform_feature_selection(test_data):
     selector2 = load_model("models/corr_scaler.pkl")
     normalizer = load_model("models/normalizer.pkl")
 
-    print(test_data.columns)
-    print(test_data.shape)
-
     selected_names = test_data.columns[selector1.get_support()]
-    selected_features = selector1.transform(test_data)
+    features = pd.DataFrame(data=selector1.transform(test_data), columns=selected_names)
     
-    print(features.shape)
-    
-    features = pd.DataFrame(data=selected_features, columns=selected_names)
     X_new = selector2.transform(test_data)
-    
     return normalizer.transform(X_new)
 
 def perform_bgl_test(test_data):
