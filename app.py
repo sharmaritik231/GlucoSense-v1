@@ -205,50 +205,78 @@ def show_home():
     st.session_state["body_vitals"] = body_vitals
 
 def show_report():
-    st.markdown("<h1 style='text-align: center;'>GlucoSense: A non-invasive diabetes monitor</h1>", unsafe_allow_html=True)
+    st.title("GlucoSense: A non-invasive diabetes monitor")
     st.markdown("""
-    <p style='text-align: center;'>
     The Diabetes Report page in GlucoSense provides a detailed analysis of an individual's health status based on breath-based sensor data and physiological parameters. 
     This report offers valuable insights into diabetes classification—non-diabetic, prediabetic, or highly diabetic—using advanced machine learning techniques.
-    </p>
+    """)
+
+    # Add custom CSS for styling and center alignment
+    st.markdown("""
+    <style>
+        .metric-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 10px;
+            margin: 10px;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+        .metric-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #333;
+        }
+        .metric-value {
+            font-size: 1.5rem;
+            color: #007BFF;
+        }
+    </style>
     """, unsafe_allow_html=True)
 
     if "diabetes_result" in st.session_state and "bgl_result" in st.session_state:
+        # Helper function to render metrics with custom styles
+        def render_metric(title, value):
+            return f"""
+            <div class="metric-container">
+                <div class="metric-title">{title}</div>
+                <div class="metric-value">{value}</div>
+            </div>
+            """
+
         # Personal Information Section
-        st.markdown("<h2 style='text-align: center;'>Personal Information</h2>", unsafe_allow_html=True)
+        st.header("Personal Information")
         col1, col2, col3 = st.columns(3)
         with col1:
-            st.metric(label="Name", value=f"{st.session_state['name']}")
+            st.markdown(render_metric("Name", st.session_state['name']), unsafe_allow_html=True)
         with col2:
-            st.metric(label="Age", value=f"{st.session_state['age']}")
+            st.markdown(render_metric("Age", st.session_state['age']), unsafe_allow_html=True)
         with col3:
-            st.metric(label="Gender", value='Male' if st.session_state['gender'] == 0 else 'Female')
-
-        # Add spacing
-        st.markdown("<br><br>", unsafe_allow_html=True)
+            st.markdown(render_metric("Gender", 'Male' if st.session_state['gender'] == 0 else 'Female'), unsafe_allow_html=True)
 
         # Body Vitals Section
-        st.markdown("<h2 style='text-align: center;'>Body Vitals</h2>", unsafe_allow_html=True)
+        st.header("Body Vitals")
         col1, col2, col3, col4 = st.columns(4)
         with col1:
-            st.metric(label="Max BP", value=f"{st.session_state['max_bp']} mmHg")
+            st.markdown(render_metric("Max BP", f"{st.session_state['max_bp']} mmHg"), unsafe_allow_html=True)
         with col2:
-            st.metric(label="Min BP", value=f"{st.session_state['min_bp']} mmHg")
+            st.markdown(render_metric("Min BP", f"{st.session_state['min_bp']} mmHg"), unsafe_allow_html=True)
         with col3:
-            st.metric(label="Heart Rate", value=f"{st.session_state['heart_rate']} bpm")
+            st.markdown(render_metric("Heart Rate", f"{st.session_state['heart_rate']} bpm"), unsafe_allow_html=True)
         with col4:
-            st.metric(label="SPO2 (%)", value=f"{st.session_state['spo2']}")
-
-        # Add spacing
-        st.markdown("<br><br>", unsafe_allow_html=True)
+            st.markdown(render_metric("SPO2 (%)", st.session_state['spo2']), unsafe_allow_html=True)
 
         # Diabetes Prediction Section
-        st.markdown("<h2 style='text-align: center;'>Diabetes Prediction</h2>", unsafe_allow_html=True)
+        st.header("Diabetes Prediction")
         col1, col2 = st.columns(2)
         with col1:
-            st.metric(label="BGL Severity", value=st.session_state['diabetes_result'])
+            st.markdown(render_metric("BGL Severity", st.session_state['diabetes_result']), unsafe_allow_html=True)
         with col2:
-            st.metric(label="Blood Glucose Level (mg/dL)", value=f"{st.session_state['bgl_result']}")
+            st.markdown(render_metric("Blood Glucose Level (mg/dL)", st.session_state['bgl_result']), unsafe_allow_html=True)
 
     else:
         st.warning("Please fill your details on Home Page.")
