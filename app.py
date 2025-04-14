@@ -249,7 +249,7 @@ def show_report():
             """
 
         # Personal Information Section
-        st.header("Personal Information")
+        st.subheader("Personal Information")
         col1, col2, col3 = st.columns(3)
         with col1:
             st.markdown(render_metric("Name", st.session_state['name']), unsafe_allow_html=True)
@@ -259,7 +259,7 @@ def show_report():
             st.markdown(render_metric("Gender", 'Male' if st.session_state['gender'] == 0 else 'Female'), unsafe_allow_html=True)
 
         # Body Vitals Section
-        st.header("Body Vitals")
+        st.subheader("Body Vitals")
         col1, col2, col3, col4 = st.columns(4)
         with col1:
             st.markdown(render_metric("Max BP", f"{st.session_state['max_bp']} mmHg"), unsafe_allow_html=True)
@@ -271,7 +271,7 @@ def show_report():
             st.markdown(render_metric("SPO2 (%)", st.session_state['spo2']), unsafe_allow_html=True)
 
         # Diabetes Prediction Section
-        st.header("Diabetes Prediction")
+        st.subheader("Diabetes Prediction")
         col1, col2 = st.columns(2)
         with col1:
             st.markdown(render_metric("BGL Severity", st.session_state['diabetes_result']), unsafe_allow_html=True)
