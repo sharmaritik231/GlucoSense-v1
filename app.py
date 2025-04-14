@@ -43,7 +43,7 @@ def show_home():
         max_bp = st.number_input("Max BP", min_value=0, value=120)
         
         # File upload
-        uploaded_file = st.file_uploader("Breath data from GlucoSense", type=["csv"])
+        uploaded_file = st.file_uploader("Breath Response", type=["csv"])
     
         if uploaded_file is not None:
             # Read the CSV file
