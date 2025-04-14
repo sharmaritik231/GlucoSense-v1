@@ -1,5 +1,6 @@
-Selector: Variance Thresholding Feature Selector
-corr_scaler: correlation selection
-AdaBoost: Regression Mode
-Stack: Stacked Ensemble model for diabetes prediction
-Vote: Weighted Voting Ensemble model for diabetes prediction
+selector: variance thresholding feature selector
+corr_scaler: correlation feature selector
+normalizer: min-max normalizing model.
+AdaBoost: BGL prediction model
+stack: Stacked Ensemble model for BGL severity prediction
+vote: Weighted Voting Ensemble model for BGL severity prediction
