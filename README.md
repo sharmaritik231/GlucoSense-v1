@@ -1,2 +1,4 @@
 # GlucoSense
-You can see the web application at: [https://glucosense-cpsrbwhwljmo8fay8mnshj.streamlit.app/](https://share.streamlit.io/app/glucosense-cpsrbwhwljmo8fay8mnshj/) 
+GlucoSense is an AI-powered web application designed to predict diabetes noninvasively using breath-based sensor data and physiological parameters. This tool leverages machine learning algorithms to classify individuals into three categories—non-diabetic, prediabetic, and highly diabetic—based on volatile organic compound (VOC) responses from breath samples, along with body vitals and demographic details.
+
+Link: https://glucosense-asowpcz4r97dasn2ol297c.streamlit.app/
