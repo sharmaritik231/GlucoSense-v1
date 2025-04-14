@@ -103,7 +103,7 @@ def show_report():
         with col1:
             st.metric(label="Systolic BP", value=f"{st.session_state['max_bp']} mmHg", border=True)
         with col2:
-            st.metric(label="Diabetes BP", value=f"{st.session_state['min_bp']} mmHg", border=True)
+            st.metric(label="Diastolic BP", value=f"{st.session_state['min_bp']} mmHg", border=True)
         with col3:
             st.metric(label="Heart Rate", value=f"{st.session_state['heart_rate']} bpm", border=True)
         with col4:
