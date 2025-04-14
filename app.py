@@ -9,9 +9,9 @@ st.set_page_config(layout="wide")
 
 def main():
     st.sidebar.title("Navigation")
-    selection = st.sidebar.selectbox("Go to", ["Body Vitals", "Report"])
+    selection = st.sidebar.selectbox("Go to", ["Home", "Report"])
 
-    if selection == "Body Vitals":
+    if selection == "Home":
         show_home()
     elif selection == "Report":
         show_report()
@@ -109,7 +109,7 @@ def show_report():
             st.metric(label="Blood Glucose Level (mg/dL)", value=f"{st.session_state['bgl_result']}", border=True)
 
     else:
-        st.warning("Please complete the test on the 'Breath Dataset' page first.")
+        st.warning("Please fill your details on Home Page.")
 
 if __name__ == "__main__":
     main()
