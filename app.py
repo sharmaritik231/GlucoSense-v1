@@ -112,7 +112,7 @@ def show_home():
 #         st.warning("Please fill your details on Home Page.")
 
 def show_report():
-    st.title("GlucoSense: A non-invasive diabetes monitor")
+    st.title("GlucoSense: Health Report")
     st.markdown("""
     The Diabetes Report page in GlucoSense provides a detailed analysis of an individual's health status based on breath-based sensor data and physiological parameters. 
     This report offers valuable insights into diabetes classification—non-diabetic, prediabetic, or highly diabetic—using advanced machine learning techniques.
@@ -120,34 +120,34 @@ def show_report():
 
     if "diabetes_result" in st.session_state and "bgl_result" in st.session_state:
         # Personal Information Section
-        st.header("Personal Information")
+        st.subheader("Personal Information")
         col1, col2, col3 = st.columns(3)
         with col1:
-            st.metric(label="Name", value=f"{st.session_state['name']}")
+            st.metric(label="Name", value=f"{st.session_state['name']}", border=True)
         with col2:
-            st.metric(label="Age", value=f"{st.session_state['age']}")
+            st.metric(label="Age", value=f"{st.session_state['age']}", border=True)
         with col3:
-            st.metric(label="Gender", value='Male' if st.session_state['gender'] == 0 else 'Female')
+            st.metric(label="Gender", value='Male' if st.session_state['gender'] == 0 else 'Female', border=True)
 
         # Body Vitals Section
-        st.header("Body Vitals")
+        st.subheader("Body Vitals")
         col1, col2, col3, col4 = st.columns(4)
         with col1:
-            st.metric(label="Max BP", value=f"{st.session_state['max_bp']} mmHg")
+            st.metric(label="Max BP", value=f"{st.session_state['max_bp']} mmHg", border=True)
         with col2:
-            st.metric(label="Min BP", value=f"{st.session_state['min_bp']} mmHg")
+            st.metric(label="Min BP", value=f"{st.session_state['min_bp']} mmHg", border=True)
         with col3:
-            st.metric(label="Heart Rate", value=f"{st.session_state['heart_rate']} bpm")
+            st.metric(label="Heart Rate", value=f"{st.session_state['heart_rate']} bpm", border=True)
         with col4:
-            st.metric(label="SPO2 (%)", value=f"{st.session_state['spo2']}")
+            st.metric(label="SPO2 (%)", value=f"{st.session_state['spo2']}", border=True)
 
         # Diabetes Prediction Section
-        st.header("Diabetes Prediction")
+        st.subheader("Diabetes Status")
         col1, col2 = st.columns(2)
         with col1:
-            st.metric(label="BGL Severity", value=st.session_state['diabetes_result'])
+            st.metric(label="BGL Severity", value=st.session_state['diabetes_result'], border=True)
         with col2:
-            st.metric(label="Blood Glucose Level (mg/dL)", value=f"{st.session_state['bgl_result']}")
+            st.metric(label="Blood Glucose Level (mg/dL)", value=f"{st.session_state['bgl_result']}", border=True)
 
     else:
         st.warning("Please fill your details on Home Page.")
