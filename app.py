@@ -39,8 +39,8 @@ def show_home():
         heart_rate = st.number_input("Heart Rate", min_value=0, value=70)
     with col2:
         spo2 = st.number_input("SPO2", min_value=0, max_value=100, value=95)
-        min_bp = st.number_input("Min BP", min_value=0, value=80)
-        max_bp = st.number_input("Max BP", min_value=0, value=120)
+        min_bp = st.number_input("Diastolic BP", min_value=0, value=80)
+        max_bp = st.number_input("Systolic BP", min_value=0, value=120)
         
         # File upload
         uploaded_file = st.file_uploader("Breath Response", type=["csv"])
@@ -101,9 +101,9 @@ def show_report():
         st.subheader("Body Vitals")
         col1, col2, col3, col4 = st.columns(4)
         with col1:
-            st.metric(label="Max BP", value=f"{st.session_state['max_bp']} mmHg", border=True)
+            st.metric(label="Systolic BP", value=f"{st.session_state['max_bp']} mmHg", border=True)
         with col2:
-            st.metric(label="Min BP", value=f"{st.session_state['min_bp']} mmHg", border=True)
+            st.metric(label="Diabetes BP", value=f"{st.session_state['min_bp']} mmHg", border=True)
         with col3:
             st.metric(label="Heart Rate", value=f"{st.session_state['heart_rate']} bpm", border=True)
         with col4:
