@@ -92,21 +92,21 @@ def show_report():
             # st.write(f"**Name:** {st.session_state['name']}")
             # st.write(f"**Age:** {st.session_state['age']}")
             # st.write(f"**Gender:** {'Male' if st.session_state['gender'] == 0 else 'Female'}")
-            st.metric(label="Name", value=f"{st.session_state['name']}")
-            st.metric(label="Age", value=f"{st.session_state['age']}")
-            st.metric(label="Gender", value='Male' if st.session_state['gender'] == 0 else 'Female')
+            st.metric(label="Name", value=f"{st.session_state['name']}", border=True)
+            st.metric(label="Age", value=f"{st.session_state['age']}", border=True)
+            st.metric(label="Gender", value='Male' if st.session_state['gender'] == 0 else 'Female', border=True)
 
         with col2:
-            st.metric(label="Max BP", value=f"{st.session_state['max_bp']} mmHg")
-            st.metric(label="Min BP", value=f"{st.session_state['min_bp']} mmHg")
+            st.metric(label="Max BP", value=f"{st.session_state['max_bp']} mmHg", border=True)
+            st.metric(label="Min BP", value=f"{st.session_state['min_bp']} mmHg", border=True)
 
         with col3:
-            st.metric(label="Heart Rate", value=f"{st.session_state['heart_rate']} bpm")
-            st.metric(label="SPO2 (%)", value=f"{st.session_state['spo2']}")
+            st.metric(label="Heart Rate", value=f"{st.session_state['heart_rate']} bpm", border=True)
+            st.metric(label="SPO2 (%)", value=f"{st.session_state['spo2']}", border=True)
 
         with col4:
-            st.metric(label="BGL Severity", value=st.session_state['diabetes_result'])
-            st.metric(label="Blood Glucose Level (mg/dL)", value=f"{st.session_state['bgl_result']}")
+            st.metric(label="BGL Severity", value=st.session_state['diabetes_result'], border=True)
+            st.metric(label="Blood Glucose Level (mg/dL)", value=f"{st.session_state['bgl_result']}", border=True)
 
     else:
         st.warning("Please complete the test on the 'Breath Dataset' page first.")
