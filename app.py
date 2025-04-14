@@ -94,7 +94,7 @@ def show_report():
             # st.write(f"**Gender:** {'Male' if st.session_state['gender'] == 0 else 'Female'}")
             st.metric(label="Name", value=f"{st.session_state['name']}")
             st.metric(label="Age", value=f"{st.session_state['age']}")
-            st.metric(label="Gender", value=f"'Male' if st.session_state['gender'] == 0 else 'Female'}")
+            st.metric(label="Gender", value='Male' if st.session_state['gender'] == 0 else 'Female')
 
         with col2:
             st.metric(label="Max BP", value=f"{st.session_state['max_bp']} mmHg")
