@@ -89,9 +89,12 @@ def show_report():
     if "diabetes_result" in st.session_state and "bgl_result" in st.session_state:
         col1, col2, col3, col4 = st.columns(4)
         with col1:
-            st.write(f"**Name:** {st.session_state['name']}")
-            st.write(f"**Age:** {st.session_state['age']}")
-            st.write(f"**Gender:** {'Male' if st.session_state['gender'] == 0 else 'Female'}")
+            # st.write(f"**Name:** {st.session_state['name']}")
+            # st.write(f"**Age:** {st.session_state['age']}")
+            # st.write(f"**Gender:** {'Male' if st.session_state['gender'] == 0 else 'Female'}")
+            st.metric(label="Name", value=f"{st.session_state['name']}")
+            st.metric(label="Age", value=f"{st.session_state['age']}")
+            st.metric(label="Gender", value=f"'Male' if st.session_state['gender'] == 0 else 'Female'}")
 
         with col2:
             st.metric(label="Max BP", value=f"{st.session_state['max_bp']} mmHg")
